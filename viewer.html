@@ -37,11 +37,17 @@ header h1{font-size:15px;margin:0;font-weight:700}
 .sug-item{padding:12px 14px;border-bottom:1px solid #f0ece0;display:flex;
   justify-content:space-between;align-items:center;font-size:13px;cursor:pointer}
 .sug-item:last-child{border-bottom:none}
-.sug-item:active{background:#f6f2ea}
+.sug-item:hover,.sug-item:active{background:#f6f2ea}
+.sug-item span{pointer-events:none}
+.br-row:hover td{background:#f6f2ea}
+.br-row{cursor:pointer}
 .sug-code{color:var(--muted);font-size:11px;font-weight:600}
 .no-res{padding:12px 14px;color:var(--muted);font-size:13px}
-.all-list{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.all-list summary{padding:14px 16px;font-size:13px;font-weight:700;color:#2A4A2A;cursor:pointer;user-select:none;display:block}
+.all-list{background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.all-list summary{padding:14px 16px;font-size:13px;font-weight:700;color:#2A4A2A;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px}
+.all-list summary::-webkit-details-marker{display:none}
+.all-list summary::before{content:'▶';font-size:10px;color:#7c8a74;transition:transform .2s;display:inline-block}
+.all-list[open] summary::before{transform:rotate(90deg)}
 .all-list table{width:100%;border-collapse:collapse;font-size:13px}
 .all-list thead th{background:#7c8a74;color:#fff;padding:8px 14px;text-align:left;font-size:12px}
 .all-list tbody td{padding:10px 14px;border-bottom:1px solid #efebe0}
@@ -137,11 +143,14 @@ th.tot-col,td.tot-col{border-left:1px solid var(--sep)}
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
 .insu-tag{font-size:10px;color:var(--muted);margin-left:4px}
 .detailrow>td{padding:0;background:#faf7f0}
-.di table{font-size:11px;table-layout:fixed;width:100%}
-.di thead th{background:#7c8a74;position:static;font-size:10.5px;padding:5px 8px;color:#fff;white-space:nowrap;overflow:hidden;transition:none;filter:none}
+.di{overflow-x:auto}
+.di table{font-size:11px;table-layout:fixed;width:100%;border-collapse:collapse}
+.di thead th{background:#7c8a74;position:static;font-size:10.5px;padding:5px 8px;color:#fff;white-space:nowrap;overflow:hidden;transition:none;filter:none;text-align:left}
+.di thead th.num{text-align:right}
 .di thead th.tot-col{background:#5e7a5e;filter:none}
 .di thead th.sep-right{border-right:1px solid #aaa}
 .di tbody td{padding:5px 8px;border-bottom:1px solid #e8e2d5;background:#faf7f0;vertical-align:middle;overflow:hidden}
+.di tbody td:first-child{background:#f0ece0;border-right:2px solid #d0cbbf}
 .mn{font-weight:700;font-family:monospace;font-size:11px}
 .paid{color:var(--blue);font-weight:700}
 .reject{color:var(--red);font-weight:700}
@@ -162,7 +171,7 @@ th.tot-col,td.tot-col{border-left:1px solid var(--sep)}
 <header style="background:#2A4A2A">
   <h1>다품목성 판촉혜택 통합 조회</h1>
   <span class="hbadge" id="hbadge-name"></span>
-  <span class="hbadge date">기준일 2026.06.10</span>
+  <span class="hbadge date">기준일 2026.06.11</span>
   <button class="back-btn" id="back-btn" style="display:none" onclick="goBack()">← 지점변경</button>
 </header>
 <div id="loading"><span class="spinner"></span>데이터 불러오는 중...</div>
@@ -309,7 +318,7 @@ function rSlip(rows,hasJeom){
   var NCOL=hasJeom?P.length+9:P.length+8;
   var fw=hasJeom?[28,80,60,140,80,110,82]:[28,60,140,80,110,82];
   var scg=makeCG(fw);
-  var dcg=hasJeom?makeCG([28,80,246,42,46,56,82]):makeCG([28,246,42,46,56,82]);
+  var dcg=hasJeom?makeCG([28,80,60,140,42,46,56,82]):makeCG([28,60,140,42,46,56,82]);
   var h='<table>'+scg+'<thead><tr><th></th>';
   if(hasJeom)h+='<th>지점</th>';
   h+='<th>판매월</th><th>전표번호</th><th>판매일자</th><th>판매자</th><th class="sep-right">인도일자</th>';
@@ -344,14 +353,14 @@ function rSlip(rows,hasJeom){
     });
     h+='<td class="num tot-col '+totCls+'">'+f(tot)+'</td></tr>';
     h+='<tr class="detailrow" id="dr'+i+'" style="display:none"><td colspan="'+NCOL+'"><div class="di">';
-    h+='<table>'+dcg+'<thead><tr><th></th>'+(hasJeom?'<th></th>':'')+'<th>모델명</th><th style="text-align:center">수량</th><th>품목</th><th>구독</th><th class="sep-right">인도일자</th>';
+    h+='<table>'+dcg+'<thead><tr><th></th>'+(hasJeom?'<th></th>':'')+'<th>판매월</th><th>모델명</th><th style="text-align:center">수량</th><th>품목</th><th>구독</th><th class="sep-right num">인도일자</th>';
     P.forEach(function(p){h+='<th class="num">'+p+'</th>';});
     h+='<th class="num tot-col">판촉 혜택 합계</th></tr></thead><tbody>';
     s.md.forEach(function(m){
       var mt=P.reduce(function(x,p){return x+(m[p+'_혜택금액']||0);},0);
       var mtPend=mt>0&&P.every(function(p){return !m[p+'_혜택금액']||isPending(m[p+'_반영월']||'');});
       var mtC=!mtPend&&P.reduce(function(x,p){var a=m[p+'_혜택금액']||0;return x+(iC(m[p+'_반영월']||'')?a:0);},0)===mt&&mt>0;
-      h+=(hasJeom?'<tr><td></td><td></td>':'<tr><td></td>')+'<td class="mn">'+m['모델명']+'</td><td style="text-align:center">'+m['판매수량']+'</td>';
+      h+=(hasJeom?'<tr><td></td><td></td>':'<tr><td></td>')+'<td>'+m['판매월']+'</td><td class="mn">'+m['모델명']+'</td><td style="text-align:center">'+m['판매수량']+'</td>';
       h+='<td>'+m['품목코드']+'</td><td>'+m['구독']+'</td>';
       h+='<td class="sep-right" style="font-size:10.5px">'+(m['인도일자']||'미인도')+'</td>';
       P.forEach(function(p){h+=monCell(p,m[p+'_혜택금액']||0,m[p+'_반영월']||'');});
@@ -479,8 +488,9 @@ function onInp(v){
   if(!q){wrap.classList.remove('show');return;}
   var m=BRANCHES.filter(function(b){return b.code.indexOf(q)>=0||b.name.toLowerCase().indexOf(q)>=0;});
   if(!m.length){wrap.innerHTML='<div class="no-res">일치하는 지점 없음</div>';wrap.classList.add('show');return;}
+  if(m.length===1){wrap.classList.remove('show');loadBranch(m[0].key,m[0].code,m[0].name,m[0].file);return;}
   var items=m.slice(0,15).map(function(b){
-    return '<div class="sug-item" data-key="'+b.key+'" data-code="'+b.code+'" data-name="'+b.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'" data-file="'+b.file+'">'
+    return '<div class="sug-item" data-key="'+b.key+'" data-code="'+b.code+'" data-name="'+b.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'" data-file="'+b.file+'" onclick="loadBranch(this.dataset.key,this.dataset.code,this.dataset.name,this.dataset.file)">'
       +'<span>'+b.name+'</span><span class="sug-code">'+b.code+'</span></div>';
   });
   wrap.innerHTML=items.join('');wrap.classList.add('show');
@@ -493,7 +503,7 @@ function doSearch(){
 }
 function renderAllTb(list){
   document.getElementById('all-tb').innerHTML=list.map(function(b){
-    return '<tr class="br-row" data-key="'+b.key+'" data-code="'+b.code+'" data-name="'+b.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'" data-file="'+b.file+'">'
+    return '<tr class="br-row" onclick="loadBranch(\''+b.key+'\',\''+b.code+'\',\''+b.name.replace(/'/g,"\\'").replace(/&/g,'&amp;')+'\',\''+b.file+'\')">'
       +'<td style="font-weight:700;color:#2A4A2A">'+b.code+'</td><td>'+b.name+'</td></tr>';
   }).join('');
 }
@@ -503,8 +513,6 @@ function filterAll(v){
 }
 document.addEventListener('click',function(e){
   if(!e.target.closest('#sinp')&&!e.target.closest('#sug-wrap'))document.getElementById('sug-wrap').classList.remove('show');
-  var si=e.target.closest('.sug-item');if(si){loadBranch(si.dataset.key,si.dataset.code,si.dataset.name,si.dataset.file);return;}
-  var br=e.target.closest('.br-row');if(br){loadBranch(br.dataset.key,br.dataset.code,br.dataset.name,br.dataset.file);return;}
 });
 var CUR_MONTH='';
 renderAllTb(BRANCHES);
