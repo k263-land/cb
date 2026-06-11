@@ -33,7 +33,7 @@ header h1{font-size:15px;margin:0;font-weight:700}
   border:none;background:var(--accent);color:#fff;cursor:pointer;white-space:nowrap}
 .sug-wrap{margin-top:8px;background:#fff;border:1px solid var(--line);border-radius:8px;
   overflow:hidden;max-height:260px;overflow-y:auto;display:none;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-.sug-wrap.show{list-style:none}
+.sug-wrap.show{display:block}
 .sug-item{padding:12px 14px;border-bottom:1px solid #f0ece0;display:flex;
   justify-content:space-between;align-items:center;font-size:13px;cursor:pointer}
 .sug-item:last-child{border-bottom:none}
@@ -41,7 +41,7 @@ header h1{font-size:15px;margin:0;font-weight:700}
 .sug-code{color:var(--muted);font-size:11px;font-weight:600}
 .no-res{padding:12px 14px;color:var(--muted);font-size:13px}
 .all-list{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.all-list summary{padding:14px 16px;font-size:13px;font-weight:700;color:#2A4A2A;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px}.all-list summary::-webkit-details-marker{display:none}.all-list summary::before{content:'\25B6';font-size:10px;color:#7c8a74;transition:transform .2s}.all-list[open] summary::before{transform:rotate(90deg)}
+.all-list summary{padding:14px 16px;font-size:13px;font-weight:700;color:#2A4A2A;cursor:pointer;user-select:none;list-style:none}
 .all-list table{width:100%;border-collapse:collapse;font-size:13px}
 .all-list thead th{background:#7c8a74;color:#fff;padding:8px 14px;text-align:left;font-size:12px}
 .all-list tbody td{padding:10px 14px;border-bottom:1px solid #efebe0}
@@ -136,7 +136,7 @@ th.tot-col,td.tot-col{border-left:1px solid var(--sep)}
 .bigo-line{display:block;font-size:9.5px;color:var(--accent2);margin-top:1px;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
 .insu-tag{font-size:10px;color:var(--muted);margin-left:4px}
-.detailrow>td{padding:0;background:#faf7f0}
+.detailrow>td{padding:0;background:#faf7f0}.modelrow td{padding:5px 8px;border-bottom:1px solid #e8e2d5;background:#faf7f0;white-space:nowrap;overflow:hidden;vertical-align:middle;font-size:11px}.modelrow td.hd{background:#7c8a74;color:#fff;font-weight:600;font-size:10.5px;padding:5px 8px}.modelrow td.hd.tot-col{background:#5e7a5e}.modelrow td.ind{background:#eae5d8}
 .di table{font-size:11px;table-layout:fixed;width:100%}
 .di thead th{background:#7c8a74;position:static;font-size:10.5px;padding:5px 8px;color:#fff;white-space:nowrap;overflow:hidden;transition:none;filter:none}
 .di thead th.tot-col{background:#5e7a5e;filter:none}
@@ -306,10 +306,8 @@ function rSlip(rows,hasJeom){
     if(r['비고']&&!by[k].bigo)by[k].bigo=r['비고'];
     if(!by[k].cust&&r['고객명'])by[k].cust=r['고객명'];
   });
-  var NCOL=hasJeom?P.length+9:P.length+8;
   var fw=hasJeom?[28,80,60,140,80,110,82]:[28,60,140,80,110,82];
   var scg=makeCG(fw);
-  var dcg=hasJeom?makeCG([28,80,246,42,46,56,82]):makeCG([28,246,42,46,56,82]);
   var h='<table>'+scg+'<thead><tr><th></th>';
   if(hasJeom)h+='<th>지점</th>';
   h+='<th>판매월</th><th>전표번호</th><th>판매일자</th><th>판매자</th><th class="sep-right">인도일자</th>';
@@ -328,6 +326,7 @@ function rSlip(rows,hasJeom){
     var allPend=tot>0&&P.every(function(p){return !pb[p]||isPending(pbMo[p]);});
     var dv=s.raw&&s.raw!=='미인도'&&s.raw?'<span class="pill done">인도완료</span>':'<span class="pill no">미인도</span>';
     var totCls=allPend?'pending':allC?'paid':'';
+    /* sumrow */
     h+='<tr class="sumrow" id="sr'+i+'" onclick="togRow('+i+')">';
     h+='<td class="tc"></td>';
     if(hasJeom)h+='<td style="font-size:11px">'+s.jm+'</td>';
@@ -337,34 +336,56 @@ function rSlip(rows,hasJeom){
     h+='<td class="sep-right">'+dv+'</td>';
     P.forEach(function(p){
       if(!pb[p]){h+='<td class="num">-</td>';return;}
-      var mo=pbMo[p];
-      var cls=isPending(mo)?'pending':pbC[p]?'paid':'';
+      var mo=pbMo[p];var cls=isPending(mo)?'pending':pbC[p]?'paid':'';
       var sp=mo?'<br><span style="font-size:9.5px">'+mo+'</span>':'';
       h+='<td class="num '+cls+'">'+f(pb[p])+sp+'</td>';
     });
     h+='<td class="num tot-col '+totCls+'">'+f(tot)+'</td></tr>';
-    h+='<tr class="detailrow" id="dr'+i+'" style="display:none"><td colspan="'+NCOL+'"><div class="di">';
-    h+='<table>'+dcg+'<thead><tr><th></th>'+(hasJeom?'<th></th>':'')+'<th>모델명</th><th style="text-align:center">수량</th><th>품목</th><th>구독</th><th class="sep-right">인도일자</th>';
-    P.forEach(function(p){h+='<th class="num">'+p+'</th>';});
-    h+='<th class="num tot-col">판촉 혜택 합계</th></tr></thead><tbody>';
-    s.md.forEach(function(m){
+    /* 헤더행 (modelrow) */
+    h+='<tr class="modelrow" id="mh'+i+'" style="display:none">';
+    h+='<td class="hd ind"></td>';
+    if(hasJeom)h+='<td class="hd"></td>';
+    h+='<td class="hd"></td>';
+    h+='<td class="hd">모델명</td>';
+    h+='<td class="hd" style="text-align:center">수량</td>';
+    h+='<td class="hd">품목·구독</td>';
+    h+='<td class="hd sep-right">인도일자</td>';
+    P.forEach(function(p){h+='<td class="hd num">'+p+'</td>';});
+    h+='<td class="hd tot-col num">혜택합계</td></tr>';
+    /* 모델행들 */
+    s.md.forEach(function(m,mi){
       var mt=P.reduce(function(x,p){return x+(m[p+'_혜택금액']||0);},0);
       var mtPend=mt>0&&P.every(function(p){return !m[p+'_혜택금액']||isPending(m[p+'_반영월']||'');});
       var mtC=!mtPend&&P.reduce(function(x,p){var a=m[p+'_혜택금액']||0;return x+(iC(m[p+'_반영월']||'')?a:0);},0)===mt&&mt>0;
-      h+=(hasJeom?'<tr><td></td><td></td>':'<tr><td></td>')+'<td class="mn">'+m['모델명']+'</td><td style="text-align:center">'+m['판매수량']+'</td>';
-      h+='<td>'+m['품목코드']+'</td><td>'+m['구독']+'</td>';
+      h+='<tr class="modelrow" id="md'+i+'_'+mi+'" style="display:none">';
+      h+='<td class="ind"></td>';
+      if(hasJeom)h+='<td></td>';
+      h+='<td></td>';
+      h+='<td><span class="mn">'+m['모델명']+'</span></td>';
+      h+='<td style="text-align:center">'+m['판매수량']+'</td>';
+      h+='<td>'+m['품목코드']+'<br><span style="font-size:9.5px;color:var(--muted)">'+m['구독']+'</span></td>';
       h+='<td class="sep-right" style="font-size:10.5px">'+(m['인도일자']||'미인도')+'</td>';
       P.forEach(function(p){h+=monCell(p,m[p+'_혜택금액']||0,m[p+'_반영월']||'');});
       h+='<td class="num tot-col '+(mtPend?'pending':mtC?'paid':'')+'">'+f(mt)+'</td></tr>';
     });
-    h+='</tbody></table></div></td></tr>';
   });
   h+='</tbody></table>';
   if(!Object.keys(by).length)h='<div class="empty">조회 결과 없음</div>';
   document.getElementById('vs').innerHTML=h;
   document.getElementById('cnt-num').textContent=Object.keys(by).length+'전표 / '+rows.length+'행';
 }
-function togRow(i){var sr=document.getElementById('sr'+i),dr=document.getElementById('dr'+i);var o=dr.style.display!=='none';dr.style.display=o?'none':'';sr.classList.toggle('open',!o);}
+function togRow(i){
+  var sr=document.getElementById('sr'+i);
+  var open=sr.classList.contains('open');
+  var mh=document.getElementById('mh'+i);
+  if(mh)mh.style.display=open?'none':'';
+  var j=0;
+  while(document.getElementById('md'+i+'_'+j)){
+    document.getElementById('md'+i+'_'+j).style.display=open?'none':'';
+    j++;
+  }
+  sr.classList.toggle('open',!open);
+}
 function rModel(rows,hasJeom){
   var h='<table style="table-layout:auto"><thead><tr>';
   if(hasJeom)h+='<th>지점</th>';
@@ -479,11 +500,9 @@ function onInp(v){
   if(!q){wrap.classList.remove('show');return;}
   var m=BRANCHES.filter(function(b){return b.code.indexOf(q)>=0||b.name.toLowerCase().indexOf(q)>=0;});
   if(!m.length){wrap.innerHTML='<div class="no-res">일치하는 지점 없음</div>';wrap.classList.add('show');return;}
-  if(m.length===1){wrap.classList.remove('show');loadBranch(m[0].key,m[0].code,m[0].name,m[0].file);return;}
   wrap.innerHTML='';
   m.slice(0,15).forEach(function(b){
-    var d=document.createElement('div');
-    d.className='sug-item';
+    var d=document.createElement('div');d.className='sug-item';
     d.innerHTML='<span>'+b.name+'</span><span class="sug-code">'+b.code+'</span>';
     d.addEventListener('click',function(){loadBranch(b.key,b.code,b.name,b.file);});
     wrap.appendChild(d);
@@ -497,11 +516,9 @@ function doSearch(){
   if(m.length===1){loadBranch(m[0].key,m[0].code,m[0].name,m[0].file);}else{onInp(v);}
 }
 function renderAllTb(list){
-  var tb=document.getElementById('all-tb');
-  tb.innerHTML='';
+  var tb=document.getElementById('all-tb');tb.innerHTML='';
   list.forEach(function(b){
-    var tr=document.createElement('tr');
-    tr.className='br-row';
+    var tr=document.createElement('tr');tr.className='br-row';
     tr.innerHTML='<td style="font-weight:700;color:#2A4A2A">'+b.code+'</td><td>'+b.name+'</td>';
     tr.addEventListener('click',function(){loadBranch(b.key,b.code,b.name,b.file);});
     tb.appendChild(tr);
