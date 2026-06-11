@@ -33,25 +33,19 @@ header h1{font-size:15px;margin:0;font-weight:700}
   border:none;background:var(--accent);color:#fff;cursor:pointer;white-space:nowrap}
 .sug-wrap{margin-top:8px;background:#fff;border:1px solid var(--line);border-radius:8px;
   overflow:hidden;max-height:260px;overflow-y:auto;display:none;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-.sug-wrap.show{display:block}
+.sug-wrap.show{list-style:none}
 .sug-item{padding:12px 14px;border-bottom:1px solid #f0ece0;display:flex;
   justify-content:space-between;align-items:center;font-size:13px;cursor:pointer}
 .sug-item:last-child{border-bottom:none}
 .sug-item:hover,.sug-item:active{background:#f6f2ea}
-.sug-item span{pointer-events:none}
-.br-row:hover td{background:#f6f2ea}
-.br-row{cursor:pointer}
 .sug-code{color:var(--muted);font-size:11px;font-weight:600}
 .no-res{padding:12px 14px;color:var(--muted);font-size:13px}
-.all-list{background:var(--panel);border:1px solid var(--line);border-radius:12px}
-.all-list summary{padding:14px 16px;font-size:13px;font-weight:700;color:#2A4A2A;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px}
-.all-list summary::-webkit-details-marker{display:none}
-.all-list summary::before{content:'▶';font-size:10px;color:#7c8a74;transition:transform .2s;display:inline-block}
-.all-list[open] summary::before{transform:rotate(90deg)}
+.all-list{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.all-list summary{padding:14px 16px;font-size:13px;font-weight:700;color:#2A4A2A;cursor:pointer;user-select:none;display:block}
 .all-list table{width:100%;border-collapse:collapse;font-size:13px}
 .all-list thead th{background:#7c8a74;color:#fff;padding:8px 14px;text-align:left;font-size:12px}
 .all-list tbody td{padding:10px 14px;border-bottom:1px solid #efebe0}
-.all-list tbody tr:active td,.br-row:active td{background:#f6f2ea}
+.all-list tbody tr:active td,.br-row:active td{background:#f6f2ea}.br-row{cursor:pointer}.br-row:hover td{background:#f6f2ea}
 .sb-wrap{padding:10px 14px 6px}
 .sb-inp{width:100%;font-family:inherit;font-size:13px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;outline:none}
 #loading{display:none;text-align:center;padding:60px;color:var(--muted);font-size:13px}
@@ -143,14 +137,11 @@ th.tot-col,td.tot-col{border-left:1px solid var(--sep)}
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
 .insu-tag{font-size:10px;color:var(--muted);margin-left:4px}
 .detailrow>td{padding:0;background:#faf7f0}
-.di{overflow-x:auto}
-.di table{font-size:11px;table-layout:fixed;width:100%;border-collapse:collapse}
-.di thead th{background:#7c8a74;position:static;font-size:10.5px;padding:5px 8px;color:#fff;white-space:nowrap;overflow:hidden;transition:none;filter:none;text-align:left}
-.di thead th.num{text-align:right}
+.di table{font-size:11px;table-layout:fixed;width:100%}
+.di thead th{background:#7c8a74;position:static;font-size:10.5px;padding:5px 8px;color:#fff;white-space:nowrap;overflow:hidden;transition:none;filter:none}
 .di thead th.tot-col{background:#5e7a5e;filter:none}
 .di thead th.sep-right{border-right:1px solid #aaa}
 .di tbody td{padding:5px 8px;border-bottom:1px solid #e8e2d5;background:#faf7f0;vertical-align:middle;overflow:hidden}
-.di tbody td:first-child{background:#f0ece0;border-right:2px solid #d0cbbf}
 .mn{font-weight:700;font-family:monospace;font-size:11px}
 .paid{color:var(--blue);font-weight:700}
 .reject{color:var(--red);font-weight:700}
@@ -247,7 +238,7 @@ th.tot-col,td.tot-col{border-left:1px solid var(--sep)}
   </div>
 </div>
 <script>
-var BRANCHES=[{"code": "300010", "name": "용산본점", "file": "300010_용산본점.json", "key": "300010_용산본점"}, {"code": "300060", "name": "울산삼산점", "file": "300060_울산삼산점.json", "key": "300060_울산삼산점"}, {"code": "300080", "name": "서신점", "file": "300080_서신점.json", "key": "300080_서신점"}, {"code": "300090", "name": "쌍용점", "file": "300090_쌍용점.json", "key": "300090_쌍용점"}, {"code": "300110", "name": "통영점", "file": "300110_통영점.json", "key": "300110_통영점"}, {"code": "300150", "name": "익산점", "file": "300150_익산점.json", "key": "300150_익산점"}, {"code": "300180", "name": "기장점", "file": "300180_기장점.json", "key": "300180_기장점"}, {"code": "300200", "name": "목포점", "file": "300200_목포점.json", "key": "300200_목포점"}, {"code": "300220", "name": "양산점", "file": "300220_양산점.json", "key": "300220_양산점"}, {"code": "300240", "name": "여수본점", "file": "300240_여수본점.json", "key": "300240_여수본점"}, {"code": "300250", "name": "오광장점", "file": "300250_오광장점.json", "key": "300250_오광장점"}, {"code": "300260", "name": "오산점", "file": "300260_오산점.json", "key": "300260_오산점"}, {"code": "300270", "name": "상남점", "file": "300270_상남점.json", "key": "300270_상남점"}, {"code": "300300", "name": "분평점", "file": "300300_분평점.json", "key": "300300_분평점"}, {"code": "300330", "name": "죽전점", "file": "300330_죽전점.json", "key": "300330_죽전점"}, {"code": "300340", "name": "서산점", "file": "300340_서산점.json", "key": "300340_서산점"}, {"code": "300350", "name": "안동점", "file": "300350_안동점.json", "key": "300350_안동점"}, {"code": "300370", "name": "아산점", "file": "300370_아산점.json", "key": "300370_아산점"}, {"code": "300390", "name": "고현점", "file": "300390_고현점.json", "key": "300390_고현점"}, {"code": "300400", "name": "일산점", "file": "300400_일산점.json", "key": "300400_일산점"}, {"code": "300410", "name": "중동점", "file": "300410_중동점.json", "key": "300410_중동점"}, {"code": "300430", "name": "대전본점", "file": "300430_대전본점.json", "key": "300430_대전본점"}, {"code": "300440", "name": "중리점", "file": "300440_중리점.json", "key": "300440_중리점"}, {"code": "300450", "name": "사하점", "file": "300450_사하점.json", "key": "300450_사하점"}, {"code": "300460", "name": "합포점", "file": "300460_합포점.json", "key": "300460_합포점"}, {"code": "300470", "name": "인후점", "file": "300470_인후점.json", "key": "300470_인후점"}, {"code": "300520", "name": "비산점", "file": "300520_비산점.json", "key": "300520_비산점"}, {"code": "300650", "name": "작전점", "file": "300650_작전점.json", "key": "300650_작전점"}, {"code": "300680", "name": "우현점", "file": "300680_우현점.json", "key": "300680_우현점"}, {"code": "300690", "name": "효문점", "file": "300690_효문점.json", "key": "300690_효문점"}, {"code": "300800", "name": "광평점", "file": "300800_광평점.json", "key": "300800_광평점"}, {"code": "300840", "name": "진주성점", "file": "300840_진주성점.json", "key": "300840_진주성점"}, {"code": "300930", "name": "상무점", "file": "300930_상무점.json", "key": "300930_상무점"}, {"code": "300940", "name": "화명점", "file": "300940_화명점.json", "key": "300940_화명점"}, {"code": "300950", "name": "도동점", "file": "300950_도동점.json", "key": "300950_도동점"}, {"code": "301040", "name": "양주점", "file": "301040_양주점.json", "key": "301040_양주점"}, {"code": "301110", "name": "제주점", "file": "301110_제주점.json", "key": "301110_제주점"}, {"code": "301150", "name": "대연점", "file": "301150_대연점.json", "key": "301150_대연점"}, {"code": "301160", "name": "내동점", "file": "301160_내동점.json", "key": "301160_내동점"}, {"code": "301290", "name": "도계점", "file": "301290_도계점.json", "key": "301290_도계점"}, {"code": "301320", "name": "홍성점", "file": "301320_홍성점.json", "key": "301320_홍성점"}, {"code": "301410", "name": "덕진점", "file": "301410_덕진점.json", "key": "301410_덕진점"}, {"code": "301440", "name": "수송점", "file": "301440_수송점.json", "key": "301440_수송점"}, {"code": "301470", "name": "첨단점", "file": "301470_첨단점.json", "key": "301470_첨단점"}, {"code": "301500", "name": "운정점", "file": "301500_운정점.json", "key": "301500_운정점"}, {"code": "301520", "name": "진해점", "file": "301520_진해점.json", "key": "301520_진해점"}, {"code": "301590", "name": "이천점", "file": "301590_이천점.json", "key": "301590_이천점"}, {"code": "301610", "name": "경기광주점", "file": "301610_경기광주점.json", "key": "301610_경기광주점"}, {"code": "301620", "name": "김해메가마트점", "file": "301620_김해메가마트점.json", "key": "301620_김해메가마트점"}, {"code": "301640", "name": "천안메가마트점", "file": "301640_천안메가마트점.json", "key": "301640_천안메가마트점"}, {"code": "301670", "name": "동래메가마트점", "file": "301670_동래메가마트점.json", "key": "301670_동래메가마트점"}, {"code": "301680", "name": "기장메가마트점", "file": "301680_기장메가마트점.json", "key": "301680_기장메가마트점"}, {"code": "301780", "name": "순천점", "file": "301780_순천점.json", "key": "301780_순천점"}, {"code": "301820", "name": "발안점", "file": "301820_발안점.json", "key": "301820_발안점"}, {"code": "301870", "name": "광주하남점", "file": "301870_광주하남점.json", "key": "301870_광주하남점"}, {"code": "301890", "name": "장유점", "file": "301890_장유점.json", "key": "301890_장유점"}, {"code": "301960", "name": "김천점", "file": "301960_김천점.json", "key": "301960_김천점"}, {"code": "302000", "name": "남원점", "file": "302000_남원점.json", "key": "302000_남원점"}, {"code": "302050", "name": "여천점", "file": "302050_여천점.json", "key": "302050_여천점"}, {"code": "302170", "name": "평택본점", "file": "302170_평택본점.json", "key": "302170_평택본점"}, {"code": "302180", "name": "현대가든파이브점", "file": "302180_현대가든파이브점.json", "key": "302180_현대가든파이브점"}, {"code": "302200", "name": "군산본점", "file": "302200_군산본점.json", "key": "302200_군산본점"}, {"code": "302220", "name": "현대가산점", "file": "302220_현대가산점.json", "key": "302220_현대가산점"}, {"code": "302240", "name": "현대송도점", "file": "302240_현대송도점.json", "key": "302240_현대송도점"}, {"code": "302250", "name": "현대스페이스1점", "file": "302250_현대스페이스1점.json", "key": "302250_현대스페이스1점"}, {"code": "302300", "name": "현대김포점", "file": "302300_현대김포점.json", "key": "302300_현대김포점"}, {"code": "302310", "name": "나주점", "file": "302310_나주점.json", "key": "302310_나주점"}, {"code": "302320", "name": "현대대구점", "file": "302320_현대대구점.json", "key": "302320_현대대구점"}, {"code": "302330", "name": "NC강서점", "file": "302330_NC강서점.json", "key": "302330_NC강서점"}, {"code": "302360", "name": "포천점", "file": "302360_포천점.json", "key": "302360_포천점"}, {"code": "302400", "name": "서귀포점", "file": "302400_서귀포점.json", "key": "302400_서귀포점"}, {"code": "302450", "name": "현대대전점", "file": "302450_현대대전점.json", "key": "302450_현대대전점"}, {"code": "302480", "name": "경산본점", "file": "302480_경산본점.json", "key": "302480_경산본점"}, {"code": "302490", "name": "커넥트현대", "file": "302490_커넥트현대.json", "key": "302490_커넥트현대"}, {"code": "302490", "name": "커넥트현대부산점", "file": "302490_커넥트현대부산점.json", "key": "302490_커넥트현대부산점"}, {"code": "302510", "name": "커넥트청주", "file": "302510_커넥트청주.json", "key": "302510_커넥트청주"}, {"code": "302510", "name": "커넥트현대청주점", "file": "302510_커넥트현대청주점.json", "key": "302510_커넥트현대청주점"}];
+var BRANCHES=[{"code": "300010", "name": "용산본점", "file": "300010_용산본점.json", "key": "300010_용산본점"}, {"code": "300060", "name": "울산삼산점", "file": "300060_울산삼산점.json", "key": "300060_울산삼산점"}, {"code": "300080", "name": "서신점", "file": "300080_서신점.json", "key": "300080_서신점"}, {"code": "300090", "name": "쌍용점", "file": "300090_쌍용점.json", "key": "300090_쌍용점"}, {"code": "300110", "name": "통영점", "file": "300110_통영점.json", "key": "300110_통영점"}, {"code": "300150", "name": "익산점", "file": "300150_익산점.json", "key": "300150_익산점"}, {"code": "300180", "name": "기장점", "file": "300180_기장점.json", "key": "300180_기장점"}, {"code": "300200", "name": "목포점", "file": "300200_목포점.json", "key": "300200_목포점"}, {"code": "300220", "name": "양산점", "file": "300220_양산점.json", "key": "300220_양산점"}, {"code": "300240", "name": "여수본점", "file": "300240_여수본점.json", "key": "300240_여수본점"}, {"code": "300250", "name": "오광장점", "file": "300250_오광장점.json", "key": "300250_오광장점"}, {"code": "300260", "name": "오산점", "file": "300260_오산점.json", "key": "300260_오산점"}, {"code": "300270", "name": "상남점", "file": "300270_상남점.json", "key": "300270_상남점"}, {"code": "300300", "name": "분평점", "file": "300300_분평점.json", "key": "300300_분평점"}, {"code": "300330", "name": "죽전점", "file": "300330_죽전점.json", "key": "300330_죽전점"}, {"code": "300340", "name": "서산점", "file": "300340_서산점.json", "key": "300340_서산점"}, {"code": "300350", "name": "안동점", "file": "300350_안동점.json", "key": "300350_안동점"}, {"code": "300370", "name": "아산점", "file": "300370_아산점.json", "key": "300370_아산점"}, {"code": "300390", "name": "고현점", "file": "300390_고현점.json", "key": "300390_고현점"}, {"code": "300400", "name": "일산점", "file": "300400_일산점.json", "key": "300400_일산점"}, {"code": "300410", "name": "중동점", "file": "300410_중동점.json", "key": "300410_중동점"}, {"code": "300430", "name": "대전본점", "file": "300430_대전본점.json", "key": "300430_대전본점"}, {"code": "300440", "name": "중리점", "file": "300440_중리점.json", "key": "300440_중리점"}, {"code": "300450", "name": "사하점", "file": "300450_사하점.json", "key": "300450_사하점"}, {"code": "300460", "name": "합포점", "file": "300460_합포점.json", "key": "300460_합포점"}, {"code": "300470", "name": "인후점", "file": "300470_인후점.json", "key": "300470_인후점"}, {"code": "300520", "name": "비산점", "file": "300520_비산점.json", "key": "300520_비산점"}, {"code": "300650", "name": "작전점", "file": "300650_작전점.json", "key": "300650_작전점"}, {"code": "300680", "name": "우현점", "file": "300680_우현점.json", "key": "300680_우현점"}, {"code": "300690", "name": "효문점", "file": "300690_효문점.json", "key": "300690_효문점"}, {"code": "300800", "name": "광평점", "file": "300800_광평점.json", "key": "300800_광평점"}, {"code": "300840", "name": "진주성점", "file": "300840_진주성점.json", "key": "300840_진주성점"}, {"code": "300930", "name": "상무점", "file": "300930_상무점.json", "key": "300930_상무점"}, {"code": "300940", "name": "화명점", "file": "300940_화명점.json", "key": "300940_화명점"}, {"code": "300950", "name": "도동점", "file": "300950_도동점.json", "key": "300950_도동점"}, {"code": "301040", "name": "양주점", "file": "301040_양주점.json", "key": "301040_양주점"}, {"code": "301110", "name": "제주점", "file": "301110_제주점.json", "key": "301110_제주점"}, {"code": "301150", "name": "대연점", "file": "301150_대연점.json", "key": "301150_대연점"}, {"code": "301160", "name": "내동점", "file": "301160_내동점.json", "key": "301160_내동점"}, {"code": "301290", "name": "도계점", "file": "301290_도계점.json", "key": "301290_도계점"}, {"code": "301320", "name": "홍성점", "file": "301320_홍성점.json", "key": "301320_홍성점"}, {"code": "301410", "name": "덕진점", "file": "301410_덕진점.json", "key": "301410_덕진점"}, {"code": "301440", "name": "수송점", "file": "301440_수송점.json", "key": "301440_수송점"}, {"code": "301470", "name": "첨단점", "file": "301470_첨단점.json", "key": "301470_첨단점"}, {"code": "301500", "name": "운정점", "file": "301500_운정점.json", "key": "301500_운정점"}, {"code": "301520", "name": "진해점", "file": "301520_진해점.json", "key": "301520_진해점"}, {"code": "301590", "name": "이천점", "file": "301590_이천점.json", "key": "301590_이천점"}, {"code": "301610", "name": "경기광주점", "file": "301610_경기광주점.json", "key": "301610_경기광주점"}, {"code": "301620", "name": "김해메가마트점", "file": "301620_김해메가마트점.json", "key": "301620_김해메가마트점"}, {"code": "301640", "name": "천안메가마트점", "file": "301640_천안메가마트점.json", "key": "301640_천안메가마트점"}, {"code": "301670", "name": "동래메가마트점", "file": "301670_동래메가마트점.json", "key": "301670_동래메가마트점"}, {"code": "301680", "name": "기장메가마트점", "file": "301680_기장메가마트점.json", "key": "301680_기장메가마트점"}, {"code": "301780", "name": "순천점", "file": "301780_순천점.json", "key": "301780_순천점"}, {"code": "301820", "name": "발안점", "file": "301820_발안점.json", "key": "301820_발안점"}, {"code": "301870", "name": "광주하남점", "file": "301870_광주하남점.json", "key": "301870_광주하남점"}, {"code": "301890", "name": "장유점", "file": "301890_장유점.json", "key": "301890_장유점"}, {"code": "301960", "name": "김천점", "file": "301960_김천점.json", "key": "301960_김천점"}, {"code": "302000", "name": "남원점", "file": "302000_남원점.json", "key": "302000_남원점"}, {"code": "302050", "name": "여천점", "file": "302050_여천점.json", "key": "302050_여천점"}, {"code": "302170", "name": "평택본점", "file": "302170_평택본점.json", "key": "302170_평택본점"}, {"code": "302180", "name": "현대가든파이브점", "file": "302180_현대가든파이브점.json", "key": "302180_현대가든파이브점"}, {"code": "302200", "name": "군산본점", "file": "302200_군산본점.json", "key": "302200_군산본점"}, {"code": "302220", "name": "현대가산점", "file": "302220_현대가산점.json", "key": "302220_현대가산점"}, {"code": "302240", "name": "현대송도점", "file": "302240_현대송도점.json", "key": "302240_현대송도점"}, {"code": "302250", "name": "현대스페이스1점", "file": "302250_현대스페이스1점.json", "key": "302250_현대스페이스1점"}, {"code": "302300", "name": "현대김포점", "file": "302300_현대김포점.json", "key": "302300_현대김포점"}, {"code": "302310", "name": "나주점", "file": "302310_나주점.json", "key": "302310_나주점"}, {"code": "302320", "name": "현대대구점", "file": "302320_현대대구점.json", "key": "302320_현대대구점"}, {"code": "302330", "name": "NC강서점", "file": "302330_NC강서점.json", "key": "302330_NC강서점"}, {"code": "302360", "name": "포천점", "file": "302360_포천점.json", "key": "302360_포천점"}, {"code": "302400", "name": "서귀포점", "file": "302400_서귀포점.json", "key": "302400_서귀포점"}, {"code": "302450", "name": "현대대전점", "file": "302450_현대대전점.json", "key": "302450_현대대전점"}, {"code": "302480", "name": "경산본점", "file": "302480_경산본점.json", "key": "302480_경산본점"}, {"code": "302490", "name": "커넥트현대부산점", "file": "302490_커넥트현대부산점.json", "key": "302490_커넥트현대부산점"}, {"code": "302490", "name": "커넥트현대", "file": "302490_커넥트현대.json", "key": "302490_커넥트현대"}, {"code": "302510", "name": "커넥트현대청주점", "file": "302510_커넥트현대청주점.json", "key": "302510_커넥트현대청주점"}, {"code": "302510", "name": "커넥트청주", "file": "302510_커넥트청주.json", "key": "302510_커넥트청주"}];
 
 var CR=/^\d{2}\.\d{1,2}월$/;
 var REJECT_VALS=new Set(['대상제외','LG반려','SS반려']);
@@ -318,7 +309,7 @@ function rSlip(rows,hasJeom){
   var NCOL=hasJeom?P.length+9:P.length+8;
   var fw=hasJeom?[28,80,60,140,80,110,82]:[28,60,140,80,110,82];
   var scg=makeCG(fw);
-  var dcg=hasJeom?makeCG([28,80,60,140,42,46,56,82]):makeCG([28,60,140,42,46,56,82]);
+  var dcg=hasJeom?makeCG([28,80,246,42,46,56,82]):makeCG([28,246,42,46,56,82]);
   var h='<table>'+scg+'<thead><tr><th></th>';
   if(hasJeom)h+='<th>지점</th>';
   h+='<th>판매월</th><th>전표번호</th><th>판매일자</th><th>판매자</th><th class="sep-right">인도일자</th>';
@@ -353,14 +344,14 @@ function rSlip(rows,hasJeom){
     });
     h+='<td class="num tot-col '+totCls+'">'+f(tot)+'</td></tr>';
     h+='<tr class="detailrow" id="dr'+i+'" style="display:none"><td colspan="'+NCOL+'"><div class="di">';
-    h+='<table>'+dcg+'<thead><tr><th></th>'+(hasJeom?'<th></th>':'')+'<th>판매월</th><th>모델명</th><th style="text-align:center">수량</th><th>품목</th><th>구독</th><th class="sep-right num">인도일자</th>';
+    h+='<table>'+dcg+'<thead><tr><th></th>'+(hasJeom?'<th></th>':'')+'<th>모델명</th><th style="text-align:center">수량</th><th>품목</th><th>구독</th><th class="sep-right">인도일자</th>';
     P.forEach(function(p){h+='<th class="num">'+p+'</th>';});
     h+='<th class="num tot-col">판촉 혜택 합계</th></tr></thead><tbody>';
     s.md.forEach(function(m){
       var mt=P.reduce(function(x,p){return x+(m[p+'_혜택금액']||0);},0);
       var mtPend=mt>0&&P.every(function(p){return !m[p+'_혜택금액']||isPending(m[p+'_반영월']||'');});
       var mtC=!mtPend&&P.reduce(function(x,p){var a=m[p+'_혜택금액']||0;return x+(iC(m[p+'_반영월']||'')?a:0);},0)===mt&&mt>0;
-      h+=(hasJeom?'<tr><td></td><td></td>':'<tr><td></td>')+'<td>'+m['판매월']+'</td><td class="mn">'+m['모델명']+'</td><td style="text-align:center">'+m['판매수량']+'</td>';
+      h+=(hasJeom?'<tr><td></td><td></td>':'<tr><td></td>')+'<td class="mn">'+m['모델명']+'</td><td style="text-align:center">'+m['판매수량']+'</td>';
       h+='<td>'+m['품목코드']+'</td><td>'+m['구독']+'</td>';
       h+='<td class="sep-right" style="font-size:10.5px">'+(m['인도일자']||'미인도')+'</td>';
       P.forEach(function(p){h+=monCell(p,m[p+'_혜택금액']||0,m[p+'_반영월']||'');});
@@ -489,11 +480,15 @@ function onInp(v){
   var m=BRANCHES.filter(function(b){return b.code.indexOf(q)>=0||b.name.toLowerCase().indexOf(q)>=0;});
   if(!m.length){wrap.innerHTML='<div class="no-res">일치하는 지점 없음</div>';wrap.classList.add('show');return;}
   if(m.length===1){wrap.classList.remove('show');loadBranch(m[0].key,m[0].code,m[0].name,m[0].file);return;}
-  var items=m.slice(0,15).map(function(b){
-    return '<div class="sug-item" data-key="'+b.key+'" data-code="'+b.code+'" data-name="'+b.name.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'" data-file="'+b.file+'" onclick="loadBranch(this.dataset.key,this.dataset.code,this.dataset.name,this.dataset.file)">'
-      +'<span>'+b.name+'</span><span class="sug-code">'+b.code+'</span></div>';
+  wrap.innerHTML='';
+  m.slice(0,15).forEach(function(b){
+    var d=document.createElement('div');
+    d.className='sug-item';
+    d.innerHTML='<span>'+b.name+'</span><span class="sug-code">'+b.code+'</span>';
+    d.addEventListener('click',function(){loadBranch(b.key,b.code,b.name,b.file);});
+    wrap.appendChild(d);
   });
-  wrap.innerHTML=items.join('');wrap.classList.add('show');
+  wrap.classList.add('show');
 }
 function doSearch(){
   var v=document.getElementById('sinp').value.trim().toLowerCase();
@@ -502,10 +497,15 @@ function doSearch(){
   if(m.length===1){loadBranch(m[0].key,m[0].code,m[0].name,m[0].file);}else{onInp(v);}
 }
 function renderAllTb(list){
-  document.getElementById('all-tb').innerHTML=list.map(function(b){
-    return '<tr class="br-row" onclick="loadBranch(\''+b.key+'\',\''+b.code+'\',\''+b.name.replace(/'/g,"\\'").replace(/&/g,'&amp;')+'\',\''+b.file+'\')">'
-      +'<td style="font-weight:700;color:#2A4A2A">'+b.code+'</td><td>'+b.name+'</td></tr>';
-  }).join('');
+  var tb=document.getElementById('all-tb');
+  tb.innerHTML='';
+  list.forEach(function(b){
+    var tr=document.createElement('tr');
+    tr.className='br-row';
+    tr.innerHTML='<td style="font-weight:700;color:#2A4A2A">'+b.code+'</td><td>'+b.name+'</td>';
+    tr.addEventListener('click',function(){loadBranch(b.key,b.code,b.name,b.file);});
+    tb.appendChild(tr);
+  });
 }
 function filterAll(v){
   var q=v.trim().toLowerCase();
@@ -513,6 +513,8 @@ function filterAll(v){
 }
 document.addEventListener('click',function(e){
   if(!e.target.closest('#sinp')&&!e.target.closest('#sug-wrap'))document.getElementById('sug-wrap').classList.remove('show');
+  var si=e.target.closest('.sug-item');if(si){loadBranch(si.dataset.key,si.dataset.code,si.dataset.name,si.dataset.file);return;}
+  var br=e.target.closest('.br-row');if(br){loadBranch(br.dataset.key,br.dataset.code,br.dataset.name,br.dataset.file);return;}
 });
 var CUR_MONTH='';
 renderAllTb(BRANCHES);
