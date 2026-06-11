@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>다품목성 판촉혜택 통합 조회</title>
+<style>
+:root{--ink:#1b2a1b;--bg:#F1ECE2;--panel:#fff;--green:#2A4A2A;--accent:#C9743F;--line:#e1dac9;--red:#c0392b;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  font-size:14px;line-height:1.5;display:flex;align-items:center;justify-content:center;
+  min-height:100vh;padding:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:28px 24px;max-width:380px;width:100%;
+  box-shadow:0 4px 24px rgba(0,0,0,.08)}
+h1{font-size:17px;font-weight:800;color:var(--green);margin:0 0 4px;text-align:center}
+.sub{font-size:12px;color:#999;margin-bottom:6px;text-align:center}
+/* ⑦ 업데이트 비고란 */
+.update-box{background:#f0f7f0;border:1px solid #c8dfc8;border-radius:9px;
+  padding:10px 13px;margin-bottom:14px;font-size:11.5px;color:#2A4A2A;line-height:1.8}
+.update-box .ut{font-weight:700;margin-bottom:4px;font-size:12px}
+.update-box ol{margin:0;padding-left:18px}
+.update-box li{margin:2px 0}
+/* ① 안내문구 */
+.notice-box{background:#fff8f2;border:1px solid #f0d8c0;border-left:4px solid var(--accent);
+  border-radius:9px;padding:11px 13px;margin-bottom:18px;font-size:12px;color:#5a3a1a;line-height:1.8}
+.notice-box b{color:var(--red)}
+.pw-wrap{display:flex;gap:8px;margin-bottom:10px}
+input[type=password]{flex:1;font-family:inherit;font-size:15px;padding:12px 14px;
+  border:1.5px solid var(--line);border-radius:9px;outline:none;background:#fff}
+input[type=password]:focus{border-color:var(--accent)}
+.login-btn{font-family:inherit;font-size:15px;font-weight:700;padding:12px 20px;
+  border-radius:9px;border:none;background:var(--green);color:#fff;cursor:pointer;white-space:nowrap}
+.err{font-size:12.5px;color:var(--red);min-height:18px;margin-bottom:16px}
+.links{display:none;flex-direction:column;gap:10px}
+.link-btn{display:block;padding:14px;border-radius:10px;font-size:15px;font-weight:700;
+  text-decoration:none;text-align:center;background:var(--green);color:#fff}
+</style></head>
+<body>
+<div class="card">
+  <h1>다품목성 판촉혜택 통합 조회</h1>
+  <div class="sub">LG · Samsung · 기준일 2026.06.11</div>
+  <div class="update-box">
+    <div class="ut">업데이트 내역</div>
+    <ol>
+      <li>삼성/LG 다품목/금액대등 26.6월 검증마감 반영</li>
+      <li>LG 입주/혼수는 6.11일(목), 오후 추가 업데이트(예정)</li>
+      <li>상세 내역은 게시판 엑셀 파일로 확인 요망</li>
+      <li>추가 수정사항은 6.12일(금)까지 담당별 개별 요청</li>
+      <li>관리담당 : LG = 정종수C, SS = 강형성J</li>
+    </ol>
+  </div>
+  <div class="notice-box">
+    해당 정보는 <b>지급 확정 내용이 아닌</b> 상품기획G 검증/반영 금액에 대한 통합 조회 안내입니다.<br>
+    최종 반영 내역은 <b>당사 전산에서 확인</b>바랍니다.
+  </div>
+  <div id="login-area">
+    <div class="pw-wrap">
+      <input type="password" id="pw" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')doLogin()">
+      <button class="login-btn" onclick="doLogin()">확인</button>
+    </div>
+    <div class="err" id="err"></div>
+  </div>
+  <div class="links" id="links">
+    <a class="link-btn" href="viewer.html">지점별 조회</a>
+  </div>
+</div>
+<script>
+var PW_HASH='b0e68ec10c1707550a7a39075884bffe78e3f4364295fbe535f6f74132ebbab1';
+function sha256(str){var buf=new TextEncoder().encode(str);return crypto.subtle.digest('SHA-256',buf).then(function(h){return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');});}
+function doLogin(){var pw=document.getElementById('pw').value;if(!pw){document.getElementById('err').textContent='비밀번호를 입력해 주세요';return;}sha256(pw).then(function(h){if(h===PW_HASH){document.getElementById('login-area').style.display='none';document.getElementById('links').style.display='flex';sessionStorage.setItem('auth','1');}else{document.getElementById('err').textContent='비밀번호가 맞지 않습니다';document.getElementById('pw').value='';document.getElementById('pw').focus();}});}
+if(sessionStorage.getItem('auth')==='1'){document.getElementById('login-area').style.display='none';document.getElementById('links').style.display='flex';}
+document.getElementById('pw').focus();
+</script></body></html>
