@@ -1,0 +1,17 @@
+{
+  "name": "전자랜드 판촉혜택 통합조회",
+  "short_name": "판촉조회",
+  "description": "LG·삼성 판촉 캐시백 통합 조회 시스템",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F1ECE2",
+  "theme_color": "#2A4A2A",
+  "icons": [
+    { "src": "icons/geomjeung/icon-geomjeung-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/geomjeung/icon-geomjeung-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/geomjeung/icon-geomjeung-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/geomjeung/icon-geomjeung-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
