@@ -337,7 +337,7 @@ th.tot-col,td.tot-col{border-left:1px solid var(--sep)}
 <header style="background:#2A4A2A">
   <h1>다품목성 판촉혜택 통합 조회</h1>
   <span class="hbadge" id="hbadge-name"></span>
-  <span class="hbadge date">기준일 2026.08.13</span>
+  <span class="hbadge date">기준일 2026.09.03</span>
   <button class="back-btn" id="back-btn" style="display:none" onclick="goBack()">← 지점변경</button>
 </header>
 <div id="loading"><span class="spinner"></span>데이터 불러오는 중...</div>
@@ -522,7 +522,7 @@ var CR=/^\d{2}\.\d{1,2}월$/;
    매월 라벨 문구가 바뀌므로(예: N월_검증대상, N월_LG검증 등) 새로 발견되는 값은 계속 추가 축적.
    2026.08 반영: '검증후'(현 데이터 자체 라벨), '8월_LG검증', '9월_검증대상' 추가 */
 var REJECT_VALS=new Set(['대상제외','LG반려','SS반려']);
-var VERIFY_VALS=new Set(['-','','인도후','미인도','인도완료','부분인도','6월_검증대상','7월_검증대상','검증후','8월_LG검증','9월_검증대상']);
+var VERIFY_VALS=new Set(['-','','인도후','미인도','인도완료','부분인도','6월_검증대상','7월_검증대상','검증후','8월_LG검증','9월_검증대상','LG검증中']);
 var PROMO_VERIFY=new Set(['입주','혼수','입주추가']);
 function f(n){return n?n.toLocaleString('ko-KR'):'-';}
 function iC(m){return m&&CR.test(m.trim());}
