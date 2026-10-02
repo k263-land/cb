@@ -51,16 +51,16 @@ input[type=password]:focus{border-color:var(--accent)}
 <body>
 <div class="card">
   <h1>다품목성 판촉혜택 통합 조회</h1>
-  <div class="sub">LG · Samsung · 기준일 2026.09.15</div>
+  <div class="sub">LG · Samsung · 기준일 2026.10.02</div>
   <div class="update-box">
-    <div class="ut">업데이트 내역_9.15일</div>
+    <div class="ut">업데이트 내역_10.2일</div>
     <ol>
-      <li>LG 입주/혼수 9월 지급대상 반영(완)</li>
-      <li>[참고] LG 입주/혼수 8월 인도는 10월 검증대상</li>
-      <li>9월 소급접수 마감 → 이후 접수건 10월대상</li>
-      <li>LG 입주/혼수는 반려는 증빙포함 메일로 접수</li>
+      <li>26.10월 기초검증 데이터 반영(완)</li>
+      <li>[안내] LG월다품목 7월판매&8월인도 전체 미지급-> 10월 재반영</li>
+      <li>추가 소급 접수는 10.6일(화) 까지 등록</li>
       <li>해당 URL는 참고用 활용 - 게시판 엑셀기준 확인</li>
       <li>동일 유형은 샘플 1건만 등록, 상세내용에 추가 기재</li>
+      <li>LG 입주/혼수 반려건은 GW메일로 접수</li>
     </ol>
   </div>
   <div class="notice-box">
@@ -80,7 +80,7 @@ input[type=password]:focus{border-color:var(--accent)}
   </div>
 </div>
 <script>
-var PW_HASH='b930821c5b00f44049b99d1e6442144ee31c0626bb9131e89b254cb363d51214';
+var PW_HASH='4d4baa77a9b1548d24e02a61b0c33ead8d136fd99288048c623316f15aec87dd';
 var ADM_HASH='2bf947e7c9880b7bc46d04ffb60b354a74c1049b1aaa210801ebea82b5066452';
 function sha256(str){var buf=new TextEncoder().encode(str);return crypto.subtle.digest('SHA-256',buf).then(function(h){return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');});}
 function doLogin(){var pw=document.getElementById('pw').value;if(!pw){document.getElementById('err').textContent='비밀번호를 입력해 주세요';return;}sha256(pw).then(function(h){if(h===PW_HASH||h===ADM_HASH){sessionStorage.setItem('auth','1');sessionStorage.setItem('adm',h===ADM_HASH?'1':'0');showLinks(h===ADM_HASH);}else{document.getElementById('err').textContent='비밀번호가 맞지 않습니다';document.getElementById('pw').value='';document.getElementById('pw').focus();}});}
